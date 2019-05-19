@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    final int SEND_MSM_PERMISSION_REQUES_CODE = 1;
+    final int SEND_SMS_PERMISSION_REQUEST_CODE = 1;
 
     EditText number;
     EditText message;
@@ -34,13 +34,13 @@ public class MainActivity extends AppCompatActivity {
             send.setEnabled(true);
         }else{
             ActivityCompat.requestPermissions(this,
-                    new String []{Manifest.permission.SEND_SMS },SEND_MSM_PERMISSION_REQUES_CODE);
+                    new String []{Manifest.permission.SEND_SMS },SEND_SMS_PERMISSION_REQUEST_CODE);
 
 
         }
 
     }
-    public void onSned (View v){
+    public void onSend (View v){
         String phoneNumber = number.getText().toString();
         String smsMessage = message.getText().toString();
         if (phoneNumber == null || phoneNumber.length()==0 ||
