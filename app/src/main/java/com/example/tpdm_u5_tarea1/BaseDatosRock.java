@@ -12,13 +12,13 @@ public class BaseDatosRock extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE CANCIONROCK(IDCANCION INTEGER PRIMARY KEY AUTOINCREMENT,CANCION VARCHAR(200))");
-        db.execSQL("INSERT INTO CANCIONROCK (CANCIONES) VALUES ('The pretender - FF .')," +
+        db.execSQL("CREATE TABLE CANCIONESROCK(IDCANCIONROCK INTEGER PRIMARY KEY AUTOINCREMENT,CANCION VARCHAR(200))");
+        db.execSQL("INSERT INTO CANCIONESROCK (CANCIONROCK) VALUES ('The pretender - Foo Figthers .')," +
                 "('Revolution - The Beatles ')," +
-                "('Smoke On the Water - ')," +
-                "('PainKiller')," +
-                "('T.N.T.')," +
-                "('Master of puppets')");
+                "('Smoke On the Water - Deep Purple ')," +
+                "('PainKiller -Judas Priest')," +
+                "('T.N.T. -  AC/DC')," +
+                "('Master of puppets - METALLICA')");
     }
 
     @Override

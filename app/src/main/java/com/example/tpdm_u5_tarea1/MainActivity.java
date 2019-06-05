@@ -17,16 +17,16 @@ public class MainActivity extends AppCompatActivity {
     final int SEND_SMS_PERMISSION_REQUEST_CODE=1;
 
 
-    static BaseDatos baseCancionesREGGETON;
-    static BaseDatosRock baseCancionesROCK;
+    static BaseDatos basecansiones;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        baseCancionesREGGETON=new BaseDatos(this,"BASE_REGGAETON",null,1);
-        baseCancionesROCK =new BaseDatosRock(this,"BASE_ROCK",null,1);
+        basecansiones=new BaseDatos(this,"BASE_CANCIONES",null,1);
+
 
         if(!checkPermission(Manifest.permission.SEND_SMS)){
             ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.SEND_SMS},SEND_SMS_PERMISSION_REQUEST_CODE);
@@ -62,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
     public static String consultarregaeton(int ID,Context context) {
         String cancion="no disponible";
         try {
-            SQLiteDatabase selec=baseCancionesREGGETON.getReadableDatabase();
-            Cursor c=selec.rawQuery("SELECT * FROM CANCIONREG WHERE IDCANCION="+ID,null);
+            SQLiteDatabase selec=basecansiones.getReadableDatabase();
+            Cursor c=selec.rawQuery("SELECT * FROM CANCIONESREG WHERE IDCANCIONREG="+ID,null);
 
             if(c.moveToFirst()){
                 do{
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static void sendsongreggaeton(String phoneNo,String[] partes,Context context){
         if (partes[0].equals("DADDY") && partes[1].equals("2222")) {
-            int id = (int) (Math.random() * 6) + 1;
+            int id = (int) (Math.random() * 5) + 1;
 
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(phoneNo, null,consultarregaeton(id, context), null, null);
@@ -98,14 +98,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     public static String consultarRock(int ID,Context context) {
-        String cancionRock="no disponible";
+        String cancionrock="no disponible";
         try {
-            SQLiteDatabase selec=baseCancionesROCK.getReadableDatabase();
-            Cursor c=selec.rawQuery("SELECT * FROM CHISTES WHERE IDCANCION="+ID,null);
+            SQLiteDatabase selec=basecansiones.getReadableDatabase();
+            Cursor c=selec.rawQuery("SELECT * FROM CANCIONESROCK WHERE IDCANCIONROCK="+ID,null);
 
             if(c.moveToFirst()){
                 do{
-                    cancionRock=c.getString(1);
+                    cancionrock=c.getString(1);
                 }while (c.moveToNext());
                 selec.close();
             }else{
@@ -114,12 +114,12 @@ public class MainActivity extends AppCompatActivity {
         }catch (SQLiteException e){
             Toast.makeText(context,"Error de consulta",Toast.LENGTH_LONG).show();
         }
-        return cancionRock;
+        return cancionrock;
     }
 
     public static void sendSongRock(String phoneNo,String[] partes,Context context){
         if (partes[0].equals("ROCK") && partes[1].equals("6666")) {
-            int id = (int) (Math.random() * 6) + 1;
+            int id = (int) (Math.random() * 5) + 1;
 
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(phoneNo, null,consultarRock(id, context), null, null);
